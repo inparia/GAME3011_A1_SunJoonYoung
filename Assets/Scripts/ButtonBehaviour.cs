@@ -15,19 +15,27 @@ public class ButtonBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(GameManager.Instance.clickStatus == ClickStatus.SCAN)
+        {
+            text.text = "Scan Mode";
+        }
+        else if(GameManager.Instance.clickStatus == ClickStatus.EXTRACT)
+        {
+            text.text = "Extract Mode";
+        }
+        else
+        {
+            text.text = "Click to Change Mode";
+        }
     }
 
     public void ScanMode()
     {
         GameManager.Instance.clickStatus = ClickStatus.SCAN;
-        text.text = "Scan Mode";
     }
 
     public void OpenMode()
     {
         GameManager.Instance.clickStatus = ClickStatus.EXTRACT;
-        text.text = "Extract Mode";
     }
-
-   
 }

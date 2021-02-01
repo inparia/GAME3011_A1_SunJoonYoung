@@ -26,6 +26,27 @@ public class TileClick : MonoBehaviour
         if (!tileScanned)
         {
             planeRenderer.material.SetColor("_Color", Color.red);
+
+            var tiles = GetComponent<TileNum>().neighbours;
+            var secondTiles = GetComponent<TileNum>().secondNeighbours;
+
+            for (int i = 0; i < tiles.Count; i++)
+            {
+                var tempPlane = tiles[i].gameObject.GetComponent<Renderer>();
+                if (!tiles[i].GetComponent<TileClick>().tileScanned)
+                {
+                    tempPlane.material.SetColor("_Color", Color.red);
+                }
+            }
+
+            for (int i = 0; i < secondTiles.Count; i++)
+            {
+                var tempPlane = secondTiles[i].gameObject.GetComponent<Renderer>();
+                if(!secondTiles[i].GetComponent<TileClick>().tileScanned)
+                {
+                    tempPlane.material.SetColor("_Color", Color.red);
+                }
+            }
         }
 
         if (Input.GetMouseButtonDown(0)){
@@ -103,6 +124,27 @@ public class TileClick : MonoBehaviour
         {
             var planeRenderer = gameObject.GetComponent<Renderer>();
             planeRenderer.material.SetColor("_Color", Color.white);
+
+            var tiles = GetComponent<TileNum>().neighbours;
+            var secondTiles = GetComponent<TileNum>().secondNeighbours;
+
+            for (int i = 0; i < tiles.Count; i++)
+            {
+                var tempPlane = tiles[i].gameObject.GetComponent<Renderer>();
+                if (!tiles[i].GetComponent<TileClick>().tileScanned)
+                {
+                    tempPlane.material.SetColor("_Color", Color.white);
+                }
+            }
+
+            for (int i = 0; i < secondTiles.Count; i++)
+            {
+                var tempPlane = secondTiles[i].gameObject.GetComponent<Renderer>();
+                if (!secondTiles[i].GetComponent<TileClick>().tileScanned)
+                {
+                    tempPlane.material.SetColor("_Color", Color.white);
+                }
+            }
         }
     }
 
@@ -126,7 +168,7 @@ public class TileClick : MonoBehaviour
         }
         else
         {
-            planeRenderer.material.SetColor("_Color", Color.white);
+            planeRenderer.material.SetColor("_Color", Color.grey);
         }
     }
 
