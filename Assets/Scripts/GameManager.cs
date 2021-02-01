@@ -1,6 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+public enum ClickStatus
+{
+    NONE,
+    SCAN,
+    EXTRACT
+}
 
 public class GameManager : MonoBehaviour
 {
@@ -35,35 +43,68 @@ public class GameManager : MonoBehaviour
     #endregion
 
     public GameObject tiles;
-    public int ColumnLength;
-    public int RowHeight;
+    public int maxCol;
+    public int maxRow;
     public GameObject[,] tilesArray;
-
-
+    public ClickStatus clickStatus;
+    public int scansLeft, extractsLeft;
+    public double res1, res2, res3, res4;
+    public bool resetTiles;
+    public Button button;
     // Start is called before the first frame update
     void Start()
     {
-        tilesArray = new GameObject[ColumnLength, RowHeight];
-        for (int i = 0; i < ColumnLength; i++)
-        {
-            for (int j = 0; j < RowHeight; j++)
-            {
-                tilesArray[i, j] = (GameObject)Instantiate(tiles, new Vector3(i, j, 0), Quaternion.Euler(tiles.transform.rotation.x, 270, 90));
-            }
-        }
+        resetTiles = false;
+        clickStatus = ClickStatus.NONE;
+        scansLeft = 6;
+        extractsLeft = 3;
+        res1 = 0;
+        res2 = 0;
+        res3 = 0;
+        res4 = 0;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         
-    }
 
-    public void getNext(float x, float y)
+        if(!resetTiles)
+        {
+            CreateTiles();
+            
+        }
+
+        if (extractsLeft == 0)
+        {
+            button.gameObject.SetActive(true);
+        }
+
+    }
+    void CreateTiles()
     {
-        int tempx = (int)x;
-        int tempy = (int)y;
-        tilesArray[tempx + 1, tempy].GetComponentInChildren<TileText>().displayText = true;
+        Reset();
+
+        tilesArray = new GameObject[maxCol, maxRow];
+        for (int i = 0; i < maxCol; i++)
+        {
+            for (int j = 0; j < maxRow; j++)
+            {
+                tilesArray[i, j] = (GameObject)Instantiate(tiles, new Vector3(i, j, 0), Quaternion.Euler(tiles.transform.rotation.x, 270, 90));
+            }
+        }
+        resetTiles = true;
     }
 
+    private void Reset()
+    {
+        clickStatus = ClickStatus.NONE;
+        scansLeft = 6;
+        extractsLeft = 3;
+        res1 = 0;
+        res2 = 0;
+        res3 = 0;
+        res4 = 0;
+    }
 }
