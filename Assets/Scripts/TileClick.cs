@@ -247,7 +247,7 @@ public class TileClick : MonoBehaviour
                 GameManager.Instance.res4 += 0.25;
             }
         }
-        else
+            else
         { }
     }
 

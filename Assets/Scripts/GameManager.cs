@@ -78,6 +78,7 @@ public class GameManager : MonoBehaviour
 
         if (extractsLeft == 0)
         {
+            scansLeft = 0;
             button.gameObject.SetActive(true);
         }
 
