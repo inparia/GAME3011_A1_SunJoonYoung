@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         resetTiles = false;
-        clickStatus = ClickStatus.NONE;
+        clickStatus = ClickStatus.EXTRACT;
         scansLeft = 6;
         extractsLeft = 3;
         res1 = 0;
@@ -100,7 +100,7 @@ public class GameManager : MonoBehaviour
 
     private void Reset()
     {
-        clickStatus = ClickStatus.NONE;
+        clickStatus = ClickStatus.EXTRACT;
         scansLeft = 6;
         extractsLeft = 3;
         res1 = 0;
